@@ -61,7 +61,6 @@ public class UserServiceImpl implements UserService {
         UserResponseProfile userResponseProfile = userRepository.profile()
                 .orElseThrow(() -> new NoSuchElementException(
                         "User with id - " + userId + " is not found!"));
-
         userResponseProfile.setResponseCarsPages(userRepository.getAllCarByUserId(userId));
         return userResponseProfile;
     }

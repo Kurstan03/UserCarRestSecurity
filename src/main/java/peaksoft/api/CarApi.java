@@ -1,6 +1,7 @@
 package peaksoft.api;
 
 import lombok.Getter;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import peaksoft.dto.request.CarRequest;
 import peaksoft.dto.response.ResponseCarInnerPage;
@@ -23,19 +24,23 @@ public class CarApi {
         this.carService = carService;
     }
     @GetMapping
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'VENDOR', 'USER')")
     List<ResponseCarsPage> getAll(@RequestParam(name = "model", required = false) String model,
                                   @RequestParam(name = "brand", required = false) String brand){
         return carService.getAllCars();
     }
     @PostMapping
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'VENDOR')")
     SimpleResponse save(@RequestBody CarRequest request){
         return carService.save(request);
     }
     @GetMapping("/{carId}")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'VENDOR', 'USER')")
     ResponseCarInnerPage innerPage(@PathVariable Long carId){
         return carService.innerPage(carId);
     }
     @DeleteMapping("/{carId}")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'VENDOR')")
     SimpleResponse delete(@PathVariable Long carId){
         return carService.delete(carId);
     }
