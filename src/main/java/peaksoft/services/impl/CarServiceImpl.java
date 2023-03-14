@@ -40,7 +40,10 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public List<ResponseCarsPage> getAllCars() {
+    public List<ResponseCarsPage> getAllCars(String brand, String model) {
+        if (!carRepository.getCarByBrandAndModel(brand, model).isEmpty()) {
+            return carRepository.getCarByBrandAndModel(brand, model);
+        }
         return carRepository.getAllCars();
     }
 

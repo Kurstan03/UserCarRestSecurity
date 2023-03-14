@@ -27,7 +27,7 @@ public class CarApi {
     @PreAuthorize("hasAnyAuthority('ADMIN', 'VENDOR', 'USER')")
     List<ResponseCarsPage> getAll(@RequestParam(name = "model", required = false) String model,
                                   @RequestParam(name = "brand", required = false) String brand){
-        return carService.getAllCars();
+        return carService.getAllCars(brand, model);
     }
     @PostMapping
     @PreAuthorize("hasAnyAuthority('ADMIN', 'VENDOR')")

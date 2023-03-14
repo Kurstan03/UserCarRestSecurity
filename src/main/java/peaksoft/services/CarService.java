@@ -13,7 +13,7 @@ import java.util.List;
  */
 public interface CarService {
     SimpleResponse save(CarRequest request);
-    List<ResponseCarsPage> getAllCars();
+    List<ResponseCarsPage> getAllCars(String brand, String model);
     ResponseCarInnerPage innerPage(Long carId);
     SimpleResponse delete(Long carId);
     List<ResponseCarsPage> searchByModelBrand(String model, String brand);
